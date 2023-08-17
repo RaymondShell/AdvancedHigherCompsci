@@ -44,6 +44,8 @@ def check_Data(usr, passw):
     try:
         cursor.execute("SELECT username, password FROM data WHERE username='%s' AND password='%s'"% (usr, passw))
         connection.commit()
+        if cursor.rowcount == 0:
+            return False
         print(cursor.rowcount, "Login Confirmed")
         return True
     except mysql.connector.Error as error:

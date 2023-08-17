@@ -56,6 +56,8 @@ def loginCheck():
     if signInConfirmation == True:
         unloadAll()
         prepMain()
+    else:
+        openPopup("Username Or Password Is Incorrect Or Does Not Exist Please Try Again Or Signup")
 
 def openPopup(text):
     top = Toplevel(window)
