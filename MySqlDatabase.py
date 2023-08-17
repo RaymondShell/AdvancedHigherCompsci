@@ -52,4 +52,11 @@ def check_Data(usr, passw):
         print("Username And Password Combo Not Found {}".format(error))
         return False
 
-#def check_data(usr, passw):
+def getPwordLengths():
+    try:
+        cursor.execute("SELECT pwordlength FROM data")
+        result = [ x[0] for x in cursor.fetchall()]
+        return result
+    except mysql.connector.Error as error:
+        print("Username And Password Combo Not Found {}".format(error))
+        return False

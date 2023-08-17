@@ -1,5 +1,5 @@
 from tkinter import *
-from MySqlDatabase import closeDatabase, Add_Data, check_Data
+from MySqlDatabase import closeDatabase, Add_Data, check_Data, getPwordLengths
 from functions import *
 window = Tk()
 window.geometry("340x440")
@@ -38,7 +38,6 @@ def prepSignup():
     window.mainloop()
 
 def signUp():
-    signUpConfirmation = False
     usrname = username.get()
     pssword = password.get()
     if len(usrname) > 0 and len(pssword) > 0:
@@ -52,7 +51,6 @@ def signUp():
         openPopup("Please Ensure the Username and password boxes are not empty")
 
 def loginCheck():
-    signInConfirmation = False
     usrname = username.get()
     pssword = password.get()
     signInConfirmation = check_Data(usrname, pssword)
@@ -73,12 +71,29 @@ def openPopup(text):
     Button(top, text="ok", command=exit_btn, width=10).pack()
 def prepMain():
     print("Goat")
+    bubbleSort()
 def Back():
     unloadAll()
     Starter.pack()
     gotoSignup.pack()
     gotoLogin.pack()
     window.mainloop()
+
+def bubbleSort():
+    pwordLengths = getPwordLengths()
+    print(pwordLengths)
+    swapped = True
+    while swapped == True:
+        swapped = False
+        for index in range(len(pwordLengths)-1):
+            if pwordLengths[index] > pwordLengths[index+1]:
+                temp = pwordLengths[index]
+                pwordLengths[index] = pwordLengths[index+1]
+                pwordLengths[index+1] = temp
+                swapped = True
+    print(pwordLengths)
+
+
 
 Starter = Label(text="Would you like to Login Or Signup?")
 gotoLogin = Button(text="Login", command=prepLogin)
