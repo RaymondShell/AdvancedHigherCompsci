@@ -71,7 +71,11 @@ def openPopup(text):
     Button(top, text="ok", command=exit_btn, width=10).pack()
 def prepMain():
     print("Goat")
-    bubbleSort()
+    leaderboard = bubbleSort()
+    for i in range(len(leaderboard)-1):
+        Label(window, text=leaderboard[i]).pack()
+        if i == 9:
+            break
 def Back():
     unloadAll()
     Starter.pack()
@@ -81,7 +85,6 @@ def Back():
 
 def bubbleSort():
     pwordLengths = getPwordLengths()
-    print(pwordLengths)
     swapped = True
     while swapped == True:
         swapped = False
@@ -91,7 +94,7 @@ def bubbleSort():
                 pwordLengths[index] = pwordLengths[index+1]
                 pwordLengths[index+1] = temp
                 swapped = True
-    print(pwordLengths)
+    return pwordLengths
 
 
 
