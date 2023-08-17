@@ -13,6 +13,7 @@ def unloadAll():
     labelPswrd.grid_forget()
     password.grid_forget()
     SignUp.grid_forget()
+    SignIn.grid_forget()
 def prepLogin():
     window.geometry("420x231")
     unloadAll()
@@ -67,7 +68,7 @@ def openPopup(text):
     Label(top, text=text, font=('Mistral 18 bold'), anchor='center').pack()
     Button(top, text="ok", command=exit_btn, width=10).pack()
 def prepMain():
-    print("Successful")
+    print("Goat")
 
 
 Starter = Label(text="Would you like to Login Or Signup?")
