@@ -1,6 +1,5 @@
 from tkinter import *
 from MySqlDatabase import closeDatabase, Add_Data, check_Data, getPwordLengths
-from functions import *
 window = Tk()
 window.geometry("340x440")
 signUpConfirmation = False
