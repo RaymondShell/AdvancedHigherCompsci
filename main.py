@@ -14,6 +14,7 @@ def unloadAll():
     password.grid_forget()
     SignUp.grid_forget()
     SignIn.grid_forget()
+    BackButton.grid_forget()
 def prepLogin():
     window.geometry("420x231")
     unloadAll()
@@ -22,6 +23,7 @@ def prepLogin():
     labelPswrd.grid(row=2, column=0)
     password.grid(row=2, column=1)
     SignIn.grid(row=3, column=1, columnspan=2)
+    BackButton.grid(row=3, column=0)
     window.mainloop()
 
 def prepSignup():
@@ -32,6 +34,7 @@ def prepSignup():
     labelPswrd.grid(row=2, column=0)
     password.grid(row=2, column=1)
     SignUp.grid(row=3, column=1, columnspan=2)
+    BackButton.grid(row=3, column=0)
     window.mainloop()
 
 def signUp():
@@ -70,13 +73,19 @@ def openPopup(text):
     Button(top, text="ok", command=exit_btn, width=10).pack()
 def prepMain():
     print("Goat")
-
+def Back():
+    unloadAll()
+    Starter.pack()
+    gotoSignup.pack()
+    gotoLogin.pack()
+    window.mainloop()
 
 Starter = Label(text="Would you like to Login Or Signup?")
 gotoLogin = Button(text="Login", command=prepLogin)
 gotoSignup = Button(text="Signup", command=prepSignup)
 SignUp = Button(window, text="Sign Up", command=signUp)
 SignIn = Button(window, text="Sign In", command=loginCheck)
+BackButton = Button(window, text="Back", command=Back)
 username = Entry(window)
 password = Entry(window, show="*")
 labelUsr = Label(window, text="Username")
