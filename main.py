@@ -40,7 +40,6 @@ def signUp():
     pssword = password.get()
     if len(usrname) > 0 and len(pssword) > 0:
         signUpConfirmation = Add_Data(usrname, pssword)
-        print(signUpConfirmation)
         if signUpConfirmation == True:
             unloadAll()
             prepLogin()

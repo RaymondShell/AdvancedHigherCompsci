@@ -22,16 +22,18 @@ def closeDatabase():
     print("MySQL connection is closed")
 
 def Add_Data(usr, passw):
-    mySql_insert_query = """INSERT INTO data (username, password) 
-                                VALUES (%s, %s) """
-    record = (usr, passw)
+    passwordLength = len(passw)
+    mySql_insert_query = """INSERT INTO data (username, password, pwordlength) 
+                                VALUES (%s, %s, %s) """
+    record = (usr, passw, passwordLength)
     try:
         cursor.execute(mySql_insert_query, record)
         connection.commit()
         print(cursor.rowcount, "SignUp Successful")
         return True
     except mysql.connector.Error as error:
-        if Error(errno=23000):
+        print("Failed to insert record into data table {}".format(error))
+        if error.errno == 1062:
             return "EXISTS"
         print("Failed to insert record into data table {}".format(error))
         return False
