@@ -5,7 +5,7 @@ def connectDatabse():
     collection = db.loginSystem
     return collection
 
-def signUp(database, loginUser):
+def signUpUser(database, loginUser):
     username = loginUser.get_username()
     password = loginUser.get_password()
     date = loginUser.get_signUpDate()

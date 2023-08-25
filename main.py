@@ -42,7 +42,7 @@ def signUp():
     pssword = password.get()
     userClass = User(usrname, pssword)
     if len(usrname) > 0 and len(pssword) > 0:
-        signUpConfirmation = signUp(database, userClass)
+        signUpConfirmation = signUpUser(database, userClass)
         if signUpConfirmation:
             unloadAll()
             prepLogin()
