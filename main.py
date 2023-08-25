@@ -1,5 +1,6 @@
 from tkinter import *
-from MySqlDatabase import closeDatabase, Add_Data, check_Data, getPwordLengths
+from mongodb import *
+from UserClass import User
 window = Tk()
 window.geometry("340x440")
 signUpConfirmation = False
@@ -39,12 +40,13 @@ def prepSignup():
 def signUp():
     usrname = username.get()
     pssword = password.get()
+    userClass = User(usrname, pssword)
     if len(usrname) > 0 and len(pssword) > 0:
-        signUpConfirmation = Add_Data(usrname, pssword)
-        if signUpConfirmation == True:
+        signUpConfirmation = signUp(database, userClass)
+        if signUpConfirmation:
             unloadAll()
             prepLogin()
-        if signUpConfirmation == "EXISTS":
+        if not signUpConfirmation:
             openPopup("Username already Exists Please Try A New One")
     else:
         openPopup("Please Ensure the Username and password boxes are not empty")
@@ -52,10 +54,11 @@ def signUp():
 def loginCheck():
     usrname = username.get()
     pssword = password.get()
-    signInConfirmation = check_Data(usrname, pssword)
+    userClass = User(usrname, pssword)
+    signInConfirmation = logIn(database, userClass)
     if signInConfirmation == True:
         unloadAll()
-        prepMain()
+        prepMain(userClass)
     else:
         openPopup("Username Or Password Is Incorrect Or Does Not Exist Please Try Again Or Signup")
 
@@ -68,13 +71,11 @@ def openPopup(text):
         top.update()
     Label(top, text=text, font=('Mistral 18 bold'), anchor='center').pack()
     Button(top, text="ok", command=exit_btn, width=10).pack()
-def prepMain():
-    print("Goat")
-    leaderboard = bubbleSort()
-    for i in range(len(leaderboard)-1):
-        Label(window, text=leaderboard[i]).pack()
-        if i == 9:
-            break
+def prepMain(UserClasses):
+    admin = adminCheck(database, UserClasses)
+    if admin:
+        print("U Da Goat")
+
 def Back():
     unloadAll()
     Starter.pack()
@@ -82,7 +83,10 @@ def Back():
     gotoLogin.pack()
     window.mainloop()
 
-def bubbleSort():
+def adminMenu():
+    print("ToDo")
+
+"""def bubbleSort():
     pwordLengths = getPwordLengths()
     swapped = True
     while swapped == True:
@@ -93,10 +97,10 @@ def bubbleSort():
                 pwordLengths[index] = pwordLengths[index+1]
                 pwordLengths[index+1] = temp
                 swapped = True
-    return pwordLengths
+    return pwordLengths"""
 
 
-
+database = connectDatabse()
 Starter = Label(text="Would you like to Login Or Signup?")
 gotoLogin = Button(text="Login", command=prepLogin)
 gotoSignup = Button(text="Signup", command=prepSignup)
@@ -111,5 +115,3 @@ Starter.pack()
 gotoSignup.pack()
 gotoLogin.pack()
 window.mainloop()
-
-closeDatabase()
